@@ -1,1 +1,3 @@
 __pycache__
+data/best_model semi_trained.pth
+data/best_model_test_data.pth
