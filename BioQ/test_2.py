@@ -50,6 +50,10 @@ def iterative_approach(pred, true_labels):
     batch_recalls.append(recall)
     batch_f1_scores.append(f1_score)
     batch_accuracies.append(accuracy)
+    print(f"Mean Precision: {sum(batch_precisions)/len(batch_precisions):.3f}")
+    print(f"Mean Recall: {sum(batch_recalls)/len(batch_recalls):.3f}")
+    print(f"Mean F1_score: {sum(batch_f1_scores)/len(batch_f1_scores):.3f}")
+    print(f"Mean Accuracy: {sum(batch_accuracies)/len(batch_accuracies):.3f}")
 
 
 def with_auc_scores():
@@ -75,7 +79,7 @@ def plot_roc_curve():
     plt.ylabel("True Positive Rate")
     plt.title("ROC Curve")
     plt.legend()
-    plt.show()
+    #plt.show()
     plt.savefig("roc_curve.png")
 
 
@@ -87,6 +91,7 @@ def plot_prc_curve():
     print(f"ROC curve Threshold: {thresholds}")
     print(f"AUC: {prc_auc:.3f}")
     print(f"F1 Score: {prc_f1_score:.3f}")
+    print(f"Precision: {precision}  and Recall: {recall} from PRC")
 
     plt.figure(figsize=(8, 6))
     plt.plot(recall, precision, label=f"PR Curve (AUC = {pr_auc:.4f})")
@@ -94,7 +99,7 @@ def plot_prc_curve():
     plt.ylabel("Precision")
     plt.title("Precision-Recall Curve")
     plt.legend()
-    plt.show()
+    #plt.show()
     plt.savefig("prc_curve.png")
 
 
@@ -114,7 +119,7 @@ def plot_metrics():
     plt.title("Metrics Per Batch")
     plt.legend()
     plt.grid(True)
-    plt.show()
+    #plt.show()
     plt.savefig("batch_metrics.png")
 
 
@@ -141,4 +146,4 @@ model = DANQ().to(device)
 model.load_state_dict(torch.load(sys.argv[1], weights_only=True, map_location=device))
 test(test_dataloader, model, sys.argv[2])
 
-# python test_2.py "./best_model_test_data.pth" "iter"
+# python test_2.py "./data/best_model_test_data.pth" "iter"
