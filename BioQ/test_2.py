@@ -12,12 +12,11 @@ from sklearn.metrics import roc_curve, roc_auc_score
 
 # Loading Data
 print("Loading Data...")
-# mat = scipy.io.loadmat('./data/visualization_batch.pt')
-# data = mat['testxdata']
-# target = mat['testdata']
-# data = torch.from_numpy(data).to(dtype=torch.float32)
-# target = torch.from_numpy(target).to(dtype=torch.float32)
-data, target = torch.load('./data/visualization_batch.pt', weights_only=True)
+mat = scipy.io.loadmat('./data/test.mat')
+data = mat['testxdata']
+target = mat['testdata']
+data = torch.from_numpy(data).to(dtype=torch.float32)
+target = torch.from_numpy(target).to(dtype=torch.float32)
 dataset = torch.utils.data.TensorDataset(data, target)
 test_dataloader = torch.utils.data.DataLoader(dataset, batch_size=100, shuffle=True)
 
